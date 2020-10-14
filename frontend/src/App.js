@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import CreateAccount from './pages/CreateAccount'
 import Logout from './pages/Logout'
+import './styles/globalStyles.css'
 
 function App() {
   return(

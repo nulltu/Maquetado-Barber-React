@@ -5,6 +5,7 @@ const userController = {
 
     //Create new user.
     createUser: async (req, res) => {
+        console.log(req.body)
         const { email, username, password } = req.body
         const userExists = await User.findOne({ username })
         const passHash = bcrypt.hashSync(password, 10)

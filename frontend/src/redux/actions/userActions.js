@@ -5,8 +5,9 @@ var path = 'http://localhost:4000/api'
 const userActions = {
 
     createAccount : newUser =>{
+        console.log(newUser)
         return async(dispatch, getState) => {
-            const response = await axios.post(path + '/users', {newUser})
+            const response = await axios.post(path + '/users', newUser)
             console.log(response)
         }
     }

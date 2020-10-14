@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import CreateAccount from './CreateAccount'
-import Login from './Login'
+import Header from '../components/Header'
+import Main from '../components/Main'
 
 const Home = () => {
     return(
         <>
-        <CreateAccount />
+        <Header />
+        <Main />
         </>
     )
 }

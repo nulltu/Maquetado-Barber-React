@@ -3,21 +3,31 @@ import { NavLink } from 'react-router-dom'
 import '../styles/header.css'
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import PersonIcon from '@material-ui/icons/Person';
+import { connect } from 'react-redux'
 
-const Header = () => {
+const Header = (props) => {
+
     return (
         <>
             <header>
                 <nav>
                     <div>
-                    <div className="container__preHeader">
-                            <MailOutlineIcon style={{ color:'#f5f5f5'}}/>
-                            <NavLink to="">zab-di@gmail.com</NavLink>     
-                    </div>
-                    <div className="container__preHeader">
-                            <PersonIcon style={{ color:'#f5f5f5'}}/>
-                            <NavLink to="/createAccount">Create Account</NavLink>     
-                    </div>
+                        <div className="container__preHeader">
+                            <MailOutlineIcon style={{ color: '#f5f5f5' }} />
+                            <NavLink to="">zab-di@gmail.com</NavLink>
+                        </div>
+
+                        {/* Si hay token se muestra el nombre del usuario en el Header, sino ee texto "create account" */}
+                        {props.token === ""
+                            ? <div className="container__preHeader">
+                                <PersonIcon style={{ color: '#f5f5f5' }} />
+                                <NavLink to="/createAccount">Create Account</NavLink>
+                            </div>
+                            : <div className="container__preHeader">
+                                <PersonIcon style={{ color: '#f5f5f5' }} />
+                                <NavLink to="/createAccount">{props.username}</NavLink>
+                            </div>}
+
 
                     </div>
                     <div className="container__navLinks">
@@ -38,4 +48,13 @@ const Header = () => {
     )
 }
 
-export default Header
+const mapStateToProps = state => {
+    return {
+        //traigo estas dos propiedades que serán despues renderizadas
+        username: state.user.username,
+        token: state.user.token
+    }
+}
+
+//conecto el Header a redux para poder traer el estado de login.
+export default connect(mapStateToProps)(Header) 

@@ -5,11 +5,13 @@ import {connect} from 'react-redux'
 
 const Login = (props) => {
 
+    //genero el obejto "user" para luego enviarlo a la axion "crear usuario" que pegara a la ruta post.
     const [dataUser, setDataUser] = useState({
         email:"", username: "", password: ""
     })
 
    
+    //leemos los inputs para despues guardador en el estado del componente
     const readInput = e =>{
         const textInput = e.target.name
         const valueInput = e.target.value 
@@ -19,6 +21,7 @@ const Login = (props) => {
         })
     }
 
+    //enviamos el obejto a la accion que pegara en la db"
     const sendData = async e =>{
         e.preventDefault()
         await props.createAccount(dataUser)
@@ -43,5 +46,5 @@ const mapDispatchToProps = {
     
 }
 
-
+//coneccioon a redux para poder enviar el obejo a la accion de "create account"
 export default connect(null, mapDispatchToProps) (Login)

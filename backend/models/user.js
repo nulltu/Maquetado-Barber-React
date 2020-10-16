@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 
 //Model of user
 const userSchema = new mongoose.Schema({
+
     email:{
         type: String, required:true
     }, 
@@ -10,7 +11,15 @@ const userSchema = new mongoose.Schema({
     },
     password:{
         type: String, required:true
-    }
+    },
+
+    phone: {
+        type: Number, default:""
+    },  
+
+    role:{
+        type: String, default: "user"
+    } 
 })
 
 const User = mongoose.model('user', userSchema)

@@ -1,5 +1,6 @@
 const User = require('../models/user')
 const bcrypt = require('bcryptjs')
+const jsonwebtoken = require('jsonwebtoken')
 
 const userController = {
 
@@ -17,9 +18,18 @@ const userController = {
                 email, username, password:passHash
             })
             var user = await newUser.save()
-            res.json({
-                success:true, user
+            jsonwebtoken.sign({...newUser}, process.env.SECRETORKEY,{},(error, token)=>{
+                if(error){
+                    res.json({
+                        success: false, error
+                    })
+                } else{
+                    res.json({
+                        success:true, username:newUser.username, token
+                    })
+                }
             })
+            
         }
     },
 

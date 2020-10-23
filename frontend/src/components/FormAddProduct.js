@@ -3,8 +3,9 @@ import {connect} from 'react-redux'
 import '../styles/admin.css'
 import { Button, TextField } from '@material-ui/core'
 import productActions from '../redux/actions/productActions'
+import axios from 'axios'
 
-const FormAddProducts = () => {
+const FormAddProducts = (props) => {
 
     const [product, setProduct] = useState({
         title: '', description: '', image:'', price: ''
@@ -19,14 +20,21 @@ const FormAddProducts = () => {
     }
 
     const sendFormProduct = async e => {
-        const formData = new FormData()
-        formData.append('title', product.title)
-        formData.append('description', product.description)
-        formData.append('image', product.image)
-        formData.append('price', product.price)
+        e.preventDefault()
+        const fd = new FormData()
+        fd.append('title', product.title)
+        fd.append('description', product.description)
+        fd.append('image', product.image)
+        fd.append('price', product.price)
+        // await props.sendFormProduct(fd)
+        const  response = await axios.post('http://127.0.0.1:4000/api/products', fd, {
+            headers:{
+                'Content-Type': 'multipart/form-data'
+            }
+        })
     }
 
-    console.log(product)
+
 
     return (
         <>
